@@ -1,0 +1,16 @@
+.left-container {
+    width: 350px;
+    background: #fff;
+}
+
+.left-container .module-item {
+    width: 200px;
+    height: 200px;
+    line-height: 160px;
+    text-align: center;
+    margin: 0 auto 16px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
