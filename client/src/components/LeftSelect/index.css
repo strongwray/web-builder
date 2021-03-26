@@ -1,6 +1,7 @@
 .left-container {
     width: 350px;
     background: #fff;
+    padding: 10px;
 }
 
 .left-container .module-item {
