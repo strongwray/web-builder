@@ -1,8 +1,12 @@
-import Content from './Content'
+import { Comment, formField }  from './Comment'
 
-export default [{
-    id: 1,
-    name: 'content',
-    description: '文章内容',
-    component: Content
-}]
+export const COMMENT_COMPONENT_NAME = 'comment'
+
+export const MODULES_MAP = {
+    [COMMENT_COMPONENT_NAME]: {
+        name: COMMENT_COMPONENT_NAME,
+        component: Comment,
+        fields: formField
+    }
+}
+
