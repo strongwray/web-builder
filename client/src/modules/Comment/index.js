@@ -17,13 +17,14 @@ export const formField = [
         label: '标题',
         name: 'title',
         value: '请输入标题',
-        example: '这里的标题牛逼'
+        example: '标题很强'
     },
-    { type: FORM_TEXTAREA_TYPE,
+    {
+        type: FORM_TEXTAREA_TYPE,
         label: '内容',
         name: 'content',
         value: '请输入内容',
-        example: '这里的标题牛逼'
+        example: '内容很强'
     }
 ]
 

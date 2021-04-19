@@ -12,9 +12,7 @@ function Screen(props) {
                     moduleList && moduleList.map((module, i) => {
                         return React.createElement('div', {
                             className: curModule === module ? 'active' : '' ,
-                            key: i, onClick: () => {
-                                selectModule(module)
-                            }
+                            key: i, onClick: () => selectModule(module)
                         }, module.element)
                     })
                 }

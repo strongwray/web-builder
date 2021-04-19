@@ -1,29 +1,43 @@
 import React from 'react'
-import { Form, Input } from 'antd'
+import { Form, Button } from 'antd'
 import { connect } from "react-redux"
 import { mapModuleStateToProps } from "../../store/module/module"
+import { MODULES_MAP } from "../../modules"
+import {FORM_FIELD_MAP} from "../../core/form/constant"
 import './index.css'
 
 function RightEdit(props) {
     const { curModule } = props
     const [form] = Form.useForm()
 
-    const onFieldsChange = (changedFields, allFields) => {
-        console.log(changedFields)
+    if (!curModule) {
+        return <div className="right-edit-container">编辑部分</div>
     }
 
-    return (<div className="right-edit-container">
-        { curModule && <Form form={form} name="dynamic_rule" onFieldsChange={onFieldsChange}>
+    const editFields = MODULES_MAP[curModule.name].fields
+
+    const onValuesChange = (value, values) => {
+        curModule.setFieldsValue(values)
+    }
+
+    form.setFieldsValue(editFields.reduce((res, cur) => {
+        res[cur.name] = cur.value
+        return res
+    }, {}))
+
+    return <div className="right-edit-container">
+        <Form form={form} name="dynamic_rule" onValuesChange={onValuesChange}>
             {
-                <div>编辑部分</div>
-                // curModule.props.fields.map(field => {
-                // return <Form.Item key={`${field.name}${field.label}`} label={field.label} name={field.name}>
-                //     { field.type === 'input' && <Input value={field.value} /> }
-                // </Form.Item>
-                // })
+                editFields.map(f => {
+                 const FieldComponent = FORM_FIELD_MAP[f.type]
+                 return <Form.Item key={`${f.name}${f.label}`} label={f.label} name={f.name}>
+                     { React.createElement(FieldComponent, {  placeholder: f.label }) }
+                </Form.Item>
+                })
             }
-        </Form> }
-    </div>)
+            <Button type="primary">保存</Button>
+        </Form>
+    </div>
 }
 
 

@@ -25,6 +25,9 @@ export const moduleFactory = (name) => {
     const moduleInstance = Object.create(modulePrototype)
     moduleInstance.name = name
     moduleInstance.element = React.createElement(component, getModuleProps(fields))
-
+    moduleInstance.setFieldsValue = (values) => {
+        const { element } = moduleInstance
+        // moduleInstance.element.forceUpdate({ ...values })
+    }
     return moduleInstance
 }
