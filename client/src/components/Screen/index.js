@@ -10,10 +10,11 @@ function Screen(props) {
                 <h3>中控屏幕</h3>
                 {
                     moduleList && moduleList.map((module, i) => {
+                        const {  component, data  } = module
                         return React.createElement('div', {
                             className: curModule === module ? 'active' : '' ,
                             key: i, onClick: () => selectModule(module)
-                        }, module.element)
+                        }, React.createElement(component, { ...data }))
                     })
                 }
             </div>

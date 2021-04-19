@@ -1,13 +1,13 @@
 import React from 'react'
 import { Form, Button } from 'antd'
 import { connect } from "react-redux"
-import { mapModuleStateToProps } from "../../store/module/module"
+import { mapModuleStateToProps, mapModuleDispatchToProps } from "../../store/module/module"
 import { MODULES_MAP } from "../../modules"
 import {FORM_FIELD_MAP} from "../../core/form/constant"
 import './index.css'
 
 function RightEdit(props) {
-    const { curModule } = props
+    const { curModule, updateModuleData } = props
     const [form] = Form.useForm()
 
     if (!curModule) {
@@ -17,13 +17,10 @@ function RightEdit(props) {
     const editFields = MODULES_MAP[curModule.name].fields
 
     const onValuesChange = (value, values) => {
-        curModule.setFieldsValue(values)
+        curModule.setModuleData(values, updateModuleData)
     }
 
-    form.setFieldsValue(editFields.reduce((res, cur) => {
-        res[cur.name] = cur.value
-        return res
-    }, {}))
+    form.setFieldsValue(curModule.data)
 
     return <div className="right-edit-container">
         <Form form={form} name="dynamic_rule" onValuesChange={onValuesChange}>
@@ -41,4 +38,4 @@ function RightEdit(props) {
 }
 
 
-export default connect(mapModuleStateToProps)(RightEdit)
+export default connect(mapModuleStateToProps, mapModuleDispatchToProps)(RightEdit)

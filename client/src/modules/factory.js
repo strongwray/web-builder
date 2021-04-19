@@ -1,4 +1,3 @@
-import React from 'react'
 import { MODULES_MAP } from './index'
 
 export const getModuleProps =  (fields) => {
@@ -24,10 +23,12 @@ export const moduleFactory = (name) => {
     const { component, fields } = module
     const moduleInstance = Object.create(modulePrototype)
     moduleInstance.name = name
-    moduleInstance.element = React.createElement(component, getModuleProps(fields))
-    moduleInstance.setFieldsValue = (values) => {
-        const { element } = moduleInstance
-        // moduleInstance.element.forceUpdate({ ...values })
+    moduleInstance.component = component
+    moduleInstance.data = getModuleProps(fields)
+
+    moduleInstance.setModuleData = (valueData, dispatchFn) => {
+        dispatchFn(valueData)
     }
+
     return moduleInstance
 }
