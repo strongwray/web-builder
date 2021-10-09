@@ -1,0 +1,1 @@
+export const newArray = (arr) => arr.concat([])
